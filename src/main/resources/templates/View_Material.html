@@ -21,6 +21,7 @@
             <th>MATERIAL ID</th>
             <th>MATERIAL NAME</th>
             <th>MATERIAL QUANTITY</th>
+            <th>MATERIAL UNIT</th>
             <th>ACTION</th>
         </tr>
         </thead>
@@ -29,6 +30,7 @@
             <td th:text="${material.id}"></td>
             <td th:text="${material.name}"></td>
             <td th:text="${material.qty}"></td>
+            <td th:text="${material.unit}"></td>
             <td>
                 <a th:href="@{/#}" target="" class="btn btn-warning">UPDATE</a>
                 <a th:href="@{/#}" target="" class="btn btn-warning">APPROVE</a>

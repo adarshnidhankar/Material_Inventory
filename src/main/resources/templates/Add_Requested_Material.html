@@ -31,6 +31,13 @@
                         <input type="number" name="qty" th:field="*{qty}" placeholder="Enter Material Quantity"
                                class="form-control" required>
                     </div>
+                    <div class="form-group">
+                        <label>SELECT MATERIAL</label>
+                        <select class="form-select" th:field="*{unit}">
+                            <option th:value="kg" th:text="KG"></option>
+                            <option th:value="gm" th:text="GM"></option>
+                        </select>
+                    </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">REQUEST MATERIAL</button>
                     </div>

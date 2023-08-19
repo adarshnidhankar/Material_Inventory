@@ -11,17 +11,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "material_request")
-public class Requested_Material {
+@Table(name = "available_material")
+public class Available_Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "name")
     private String name;
-    @Column(name = "quantity")
+    @Column(name = "qty")
     private int qty;
     @Column(name = "unit")
     private String unit;
-
 }
