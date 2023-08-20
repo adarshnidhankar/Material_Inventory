@@ -19,7 +19,7 @@ public class Available_Material {
     private int id;
     @Column(name = "name")
     private String name;
-    @Column(name = "qty")
+    @Column(name = "quantity")
     private int qty;
     @Column(name = "unit")
     private String unit;

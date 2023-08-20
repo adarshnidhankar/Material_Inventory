@@ -2,6 +2,7 @@ package com.Spring_Boot.Material_Inventory.controller;
 
 import com.Spring_Boot.Material_Inventory.model.Material;
 import com.Spring_Boot.Material_Inventory.model.Requested_Material;
+import com.Spring_Boot.Material_Inventory.service.Available_Material_Service;
 import com.Spring_Boot.Material_Inventory.service.Material_Request_Service;
 import com.Spring_Boot.Material_Inventory.service.Material_Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class Main_Controller {
 
     @Autowired
     Material_Request_Service request_service;
+
+    @Autowired
+    private Available_Material_Service availableMaterialService;
 
     public Main_Controller(Material_Service materialService) {
         super();
@@ -87,7 +91,7 @@ public class Main_Controller {
         return "Site_Incharge";
     }
 
-    // this api is used to only display all the material requested by the site in-charge.
+    // this api is used to only display all the material requested by the site in-charge to the store in-charge.
     @GetMapping("/user")
     public String siteInchargeMeth2(Model model) {
         model.addAttribute("req_material", request_service.getAllMaterial());
@@ -108,7 +112,12 @@ public class Main_Controller {
         return "redirect:/siteIncharge";
     }
 
-
+    //this api is used to fetch all the available material in table.
+    @GetMapping("/avaMaterial")
+    public String availableMaterial(Model model) {
+        model.addAttribute("ava_material", availableMaterialService.getAllMaterial());
+        return "Available_Material";
+    }
 
 
 }
