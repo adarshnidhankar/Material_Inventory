@@ -109,7 +109,7 @@ public class Main_Controller {
     @PostMapping("/saveRequestedMaterial")
     public String saveRequestedMaterial(@ModelAttribute() Requested_Material material) {
         request_service.saveMaterial(material);
-        return "redirect:/siteIncharge";
+        return "redirect:/avaMaterial";
     }
 
     //this api is used to fetch all the available material in table.
@@ -118,6 +118,7 @@ public class Main_Controller {
         model.addAttribute("ava_material", availableMaterialService.getAllMaterial());
         return "Available_Material";
     }
+
 
 
 }

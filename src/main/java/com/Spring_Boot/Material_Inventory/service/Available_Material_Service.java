@@ -22,4 +22,10 @@ public class Available_Material_Service implements Available_Service_Interface{
     public Available_Material saveMaterial(Available_Material availableMaterial) {
         return material_repo.save(availableMaterial);
     }
+
+    public Available_Material findByName(String name) {
+        return material_repo.findByName(name);
+    }
+
+
 }
