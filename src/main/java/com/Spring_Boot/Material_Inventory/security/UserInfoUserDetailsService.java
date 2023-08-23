@@ -13,6 +13,10 @@ public class UserInfoUserDetailsService implements UserDetailsService {
     @Autowired
     private UserInfo_Repo userInfoRepo;
 
+    public UserInfoUserDetailsService(UserInfo_Repo userInfoRepo) {
+        this.userInfoRepo = userInfoRepo;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserInfo> user = userInfoRepo.findByUserName(username);

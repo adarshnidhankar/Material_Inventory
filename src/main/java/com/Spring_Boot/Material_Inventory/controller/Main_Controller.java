@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/myStore")
 public class Main_Controller {
     @Autowired
     Material_Service materialService;
@@ -35,7 +34,7 @@ public class Main_Controller {
     }
 
     //this api will fetch all the material list in the database.
-    @GetMapping("/myStore/getMaterial")
+    @GetMapping("/getMaterial")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String materialList(Model model) {
         model.addAttribute("materials", materialService.getAllMaterial());
@@ -43,7 +42,7 @@ public class Main_Controller {
     }
 
     // this api will use to open the add material form.
-    @GetMapping("/myStore/addMaterial")
+    @GetMapping("/addMaterial")
     public String addMaterial(Model model) {
         Material material = new Material();
         model.addAttribute("newMaterial", material);
@@ -51,21 +50,21 @@ public class Main_Controller {
     }
 
     // this api will use to save the material entered by user in the form into the database.
-    @PostMapping("/myStore/saveMaterial")
+    @PostMapping("/saveMaterial")
     public String saveMaterial(@ModelAttribute() Material material) {
         materialService.saveMaterial(material);
         return "redirect:/getMaterial";
     }
 
     //this api will accept the updated value from the user.
-    @GetMapping("/myStore/updateMaterial/{id}")
+    @GetMapping("/updateMaterial/{id}")
     public String updateMaterial(@PathVariable int id, Model model) {
         model.addAttribute("material", materialService.getMaterialId(id));
         return "/Update_Material";
     }
 
     // this api will use to save the updated values into the databases.
-    @PostMapping("/myStore/updateMaterial/{id}")
+    @PostMapping("/updateMaterial/{id}")
     public String updateMaterialMeth(@PathVariable int id, @ModelAttribute("material") Material material, Model model) {
         Material existingMaterial = materialService.getMaterialId(id);
         existingMaterial.setId(id);
@@ -79,14 +78,14 @@ public class Main_Controller {
     }
 
     // this api will use to delete the specified material by id.
-    @GetMapping("/myStore/deleteMaterial/{id}")
+    @GetMapping("/deleteMaterial/{id}")
     public String deleteMaterial(@PathVariable int id) {
         materialService.deleteMaterialById(id);
         return "redirect:/getMaterial";
     }
 
     // this api will use to fetch the all the material requested by the site in-charge.
-    @GetMapping("/myStore/siteIncharge")
+    @GetMapping("/siteIncharge")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public String siteInchargeMeth(Model model) {
         model.addAttribute("req_material", request_service.getAllMaterial());
@@ -94,7 +93,7 @@ public class Main_Controller {
     }
 
     // this api is used to only display all the material requested by the site in-charge to the store in-charge.
-    @GetMapping("/myStore/user")
+    @GetMapping("/user")
     public String siteInchargeMeth2(Model model) {
         model.addAttribute("req_material", request_service.getAllMaterial());
         return "View_Material";
@@ -102,21 +101,21 @@ public class Main_Controller {
 
 
     // this api is used add requested material by site in-charge.
-    @GetMapping("/myStore/addRequestedMaterial")
+    @GetMapping("/addRequestedMaterial")
     public String addMaterialRequest(Model model) {
         Requested_Material requestedMaterial = new Requested_Material();
         model.addAttribute("newMaterial", requestedMaterial);
         return "Add_Requested_Material";
     }
     // this is used to save the requested material into the table.
-    @PostMapping("/myStore/saveRequestedMaterial")
+    @PostMapping("/saveRequestedMaterial")
     public String saveRequestedMaterial(@ModelAttribute() Requested_Material material) {
         request_service.saveMaterial(material);
         return "redirect:/avaMaterial";
     }
 
     //this api is used to fetch all the available material in table.
-    @GetMapping("/myStore/avaMaterial")
+    @GetMapping("/avaMaterial")
     public String availableMaterial(Model model) {
         model.addAttribute("ava_material", availableMaterialService.getAllMaterial());
         return "Available_Material";

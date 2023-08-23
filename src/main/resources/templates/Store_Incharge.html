@@ -21,13 +21,13 @@
     <hr>
     <div class="row">
         <div class="col-lg-3">
-            <a th:href="@{/myStore/addMaterial}" class="btn btn-primary btn-sm-mb-3"> ADD MATERIAL</a>
+            <a th:href="@{/addMaterial}" class="btn btn-primary btn-sm-mb-3"> ADD MATERIAL</a>
         </div>
     </div>
     <hr>
     <div class="row">
         <div class="col-lg-3">
-            <a th:href="@{/myStore/user}" class="btn btn-secondary btn-sm-mb-3"> VIEW REQUESTED MATERIAL</a>
+            <a th:href="@{/user}" class="btn btn-secondary btn-sm-mb-3"> VIEW REQUESTED MATERIAL</a>
         </div>
     </div>
     <hr>
@@ -48,8 +48,8 @@
             <td th:text="${material.qty}"></td>
             <td th:text="${material.unit}"></td>
             <td>
-                <a th:href="@{/myStore/updateMaterial/{id}(id=${material.id})}" target="" class="btn btn-warning">UPDATE</a>
-                <a th:href="@{/myStore/deleteMaterial/{id}(id=${material.id})}" target="" class="btn btn-danger">DELETE</a>
+                <a th:href="@{/updateMaterial/{id}(id=${material.id})}" target="" class="btn btn-warning">UPDATE</a>
+                <a th:href="@{/deleteMaterial/{id}(id=${material.id})}" target="" class="btn btn-danger">DELETE</a>
             </td>
         </tr>
         </tbody>
