@@ -1,6 +1,7 @@
 package com.Spring_Boot.Material_Inventory.service;
 
 import com.Spring_Boot.Material_Inventory.model.Available_Material;
+import com.Spring_Boot.Material_Inventory.model.Material;
 import com.Spring_Boot.Material_Inventory.repository.Available_Material_Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,16 @@ public class Available_Material_Service implements Available_Service_Interface{
         return material_repo.findAll();
     }
 
+    public Available_Material getMaterialId(int id) {
+        return material_repo.findById(id).get();
+    }
     @Override
     public Available_Material saveMaterial(Available_Material availableMaterial) {
         return material_repo.save(availableMaterial);
     }
 
-    public Available_Material findByName(String name) {
-        return material_repo.findByName(name);
+    public Available_Material updateAvailableMaterial(Available_Material material) {
+        return material_repo.save(material);
     }
 
 

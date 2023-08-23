@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface Available_Material_Repo extends JpaRepository<Available_Material,Integer> {
-    Available_Material findByName(String name);
+
 }

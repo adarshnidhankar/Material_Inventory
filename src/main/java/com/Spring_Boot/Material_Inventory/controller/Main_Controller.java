@@ -1,19 +1,19 @@
 package com.Spring_Boot.Material_Inventory.controller;
 
+import com.Spring_Boot.Material_Inventory.model.Available_Material;
 import com.Spring_Boot.Material_Inventory.model.Material;
 import com.Spring_Boot.Material_Inventory.model.Requested_Material;
 import com.Spring_Boot.Material_Inventory.service.Available_Material_Service;
 import com.Spring_Boot.Material_Inventory.service.Material_Request_Service;
 import com.Spring_Boot.Material_Inventory.service.Material_Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/myStore")
 public class Main_Controller {
     @Autowired
     Material_Service materialService;
@@ -35,14 +35,15 @@ public class Main_Controller {
     }
 
     //this api will fetch all the material list in the database.
-    @GetMapping("/getMaterial")
+    @GetMapping("/myStore/getMaterial")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String materialList(Model model) {
         model.addAttribute("materials", materialService.getAllMaterial());
         return "/Store_Incharge";
     }
 
     // this api will use to open the add material form.
-    @GetMapping("/addMaterial")
+    @GetMapping("/myStore/addMaterial")
     public String addMaterial(Model model) {
         Material material = new Material();
         model.addAttribute("newMaterial", material);
@@ -50,21 +51,21 @@ public class Main_Controller {
     }
 
     // this api will use to save the material entered by user in the form into the database.
-    @PostMapping("/saveMaterial")
+    @PostMapping("/myStore/saveMaterial")
     public String saveMaterial(@ModelAttribute() Material material) {
         materialService.saveMaterial(material);
         return "redirect:/getMaterial";
     }
 
     //this api will accept the updated value from the user.
-    @GetMapping("/updateMaterial/{id}")
+    @GetMapping("/myStore/updateMaterial/{id}")
     public String updateMaterial(@PathVariable int id, Model model) {
         model.addAttribute("material", materialService.getMaterialId(id));
         return "/Update_Material";
     }
 
     // this api will use to save the updated values into the databases.
-    @PostMapping("/updateMaterial/{id}")
+    @PostMapping("/myStore/updateMaterial/{id}")
     public String updateMaterialMeth(@PathVariable int id, @ModelAttribute("material") Material material, Model model) {
         Material existingMaterial = materialService.getMaterialId(id);
         existingMaterial.setId(id);
@@ -78,47 +79,65 @@ public class Main_Controller {
     }
 
     // this api will use to delete the specified material by id.
-    @GetMapping("/deleteMaterial/{id}")
+    @GetMapping("/myStore/deleteMaterial/{id}")
     public String deleteMaterial(@PathVariable int id) {
         materialService.deleteMaterialById(id);
         return "redirect:/getMaterial";
     }
 
     // this api will use to fetch the all the material requested by the site in-charge.
-    @GetMapping("/siteIncharge")
+    @GetMapping("/myStore/siteIncharge")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public String siteInchargeMeth(Model model) {
         model.addAttribute("req_material", request_service.getAllMaterial());
         return "Site_Incharge";
     }
 
     // this api is used to only display all the material requested by the site in-charge to the store in-charge.
-    @GetMapping("/user")
+    @GetMapping("/myStore/user")
     public String siteInchargeMeth2(Model model) {
         model.addAttribute("req_material", request_service.getAllMaterial());
         return "View_Material";
     }
 
+
     // this api is used add requested material by site in-charge.
-    @GetMapping("/addRequestedMaterial")
+    @GetMapping("/myStore/addRequestedMaterial")
     public String addMaterialRequest(Model model) {
         Requested_Material requestedMaterial = new Requested_Material();
         model.addAttribute("newMaterial", requestedMaterial);
         return "Add_Requested_Material";
     }
     // this is used to save the requested material into the table.
-    @PostMapping("/saveRequestedMaterial")
+    @PostMapping("/myStore/saveRequestedMaterial")
     public String saveRequestedMaterial(@ModelAttribute() Requested_Material material) {
         request_service.saveMaterial(material);
         return "redirect:/avaMaterial";
     }
 
     //this api is used to fetch all the available material in table.
-    @GetMapping("/avaMaterial")
+    @GetMapping("/myStore/avaMaterial")
     public String availableMaterial(Model model) {
         model.addAttribute("ava_material", availableMaterialService.getAllMaterial());
         return "Available_Material";
     }
 
-
+//    @GetMapping("/updateAva-Material/{id}")
+//    public String updateAvailableMaterial(@PathVariable int id, Model model) {
+//        model.addAttribute("ava_material", availableMaterialService.getMaterialId(id));
+//        return "/Update_Material";
+//    }
+//
+//    @GetMapping("/updateAvailableMaterial/{id}")
+//    public String updateAvailableMaterial(@PathVariable int id, @ModelAttribute("ava_material") Material material, Model model) {
+//        Available_Material existingAvaMaterial = availableMaterialService.getMaterialId(id);
+//        existingAvaMaterial.setId(id);
+//        existingAvaMaterial.setName(material.getName());
+//        existingAvaMaterial.setQty(material.getQty());
+//        existingAvaMaterial.setUnit(material.getUnit());
+//
+//        availableMaterialService.updateAvailableMaterial(existingAvaMaterial);
+//        return "redirect:/avaMaterial";
+//    }
 
 }
