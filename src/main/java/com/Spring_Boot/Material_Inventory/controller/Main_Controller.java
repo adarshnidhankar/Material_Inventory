@@ -121,22 +121,20 @@ public class Main_Controller {
         return "Available_Material";
     }
 
-//    @GetMapping("/updateAva-Material/{id}")
-//    public String updateAvailableMaterial(@PathVariable int id, Model model) {
-//        model.addAttribute("ava_material", availableMaterialService.getMaterialId(id));
-//        return "/Update_Material";
-//    }
-//
-//    @GetMapping("/updateAvailableMaterial/{id}")
-//    public String updateAvailableMaterial(@PathVariable int id, @ModelAttribute("ava_material") Material material, Model model) {
-//        Available_Material existingAvaMaterial = availableMaterialService.getMaterialId(id);
-//        existingAvaMaterial.setId(id);
-//        existingAvaMaterial.setName(material.getName());
-//        existingAvaMaterial.setQty(material.getQty());
-//        existingAvaMaterial.setUnit(material.getUnit());
-//
-//        availableMaterialService.updateAvailableMaterial(existingAvaMaterial);
-//        return "redirect:/avaMaterial";
-//    }
+    //delete material from available material table.
+    @GetMapping("/deleteAvailableMaterial/{id}")
+    public String deleteAvailableMaterial(@PathVariable int id) {
+        availableMaterialService.deleteAvailableMaterialById(id);
+        return "redirect:/avaMaterial";
+    }
+
+    //delete material from the requested material table.
+    @GetMapping("/deleteRequestedMaterial/{id}")
+    public String deleteRequestedMaterial(@PathVariable int id) {
+        request_service.deleteRequestedMaterial(id);
+        return "redirect:/user";
+    }
+
+
 
 }

@@ -33,7 +33,7 @@
             <td th:text="${material.qty}"></td>
             <td th:text="${material.unit}"></td>
             <td>
-                <a th:href="@{/#}" target="" class="btn btn-warning">APPROVE</a>
+                <a th:href="@{/deleteRequestedMaterial/{id}(id=${material.id})}" target="" class="btn btn-success">APPROVE</a>
             </td>
         </tr>
         </tbody>

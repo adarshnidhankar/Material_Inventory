@@ -24,7 +24,9 @@ public class Material_Request_Service implements Material_Request_Service_Interf
         return requestRepo.save(material);
     }
 
-    public void updateQuantity(int qty, Material material) {
-        
+    @Override
+    public void deleteRequestedMaterial(int id) {
+        requestRepo.deleteById(id);
     }
+
 }

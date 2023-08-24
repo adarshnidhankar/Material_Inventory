@@ -8,4 +8,6 @@ import java.util.List;
 public interface Material_Request_Service_Interface {
     List<Requested_Material> getAllMaterial();
     Requested_Material saveMaterial(Requested_Material material);
+
+    void deleteRequestedMaterial(int id);
 }

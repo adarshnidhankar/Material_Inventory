@@ -16,11 +16,11 @@
             <h1 class="text-center">ADDING NEW MATERIAL</h1>
             <div class="card-body">
                 <form th:action="@{/saveMaterial}" th:object="${newMaterial}" name="myform" method="post">
-                    <div class="form-group">
-                        <label>MATERIAL ID</label>
-                        <input type="number" name="id" th:field="*{id}" autofocus placeholder="Enter Material ID"
-                               class="form-control" required>
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label>MATERIAL ID</label>-->
+<!--                        <input type="number" name="id" th:field="*{id}" autofocus placeholder="Enter Material ID"-->
+<!--                               class="form-control" required>-->
+<!--                    </div>-->
                     <div class="form-group">
                         <label>SELECT MATERIAL NAME</label>
                         <select class="form-select" th:field="*{name}">
