@@ -135,6 +135,11 @@ public class Main_Controller {
         return "redirect:/user";
     }
 
+    //this is used to redirect the user signup page.
+    @GetMapping("/signup")
+    public String signupPage(){
+        return "/User_Signup";
+    }
 
 
 }
