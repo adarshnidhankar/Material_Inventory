@@ -7,21 +7,27 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Optional;
-
-public class UserInfoUserDetailsService implements UserDetailsService {
+public class UserInfoUserDetailsService /*implements UserDetailsService*/ {
     @Autowired
     private UserInfo_Repo userInfoRepo;
+
+    public UserInfoUserDetailsService(){
+
+    }
 
     public UserInfoUserDetailsService(UserInfo_Repo userInfoRepo) {
         this.userInfoRepo = userInfoRepo;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserInfo> user = userInfoRepo.findByUserName(username);
-        return user.map(UserInfoDetails::new)
-                .orElseThrow(() -> new UsernameNotFoundException("user not found"));
-
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        //fetching user from database.
+//        UserInfo user = userInfoRepo.getUserByUserName(username);
+//        if (user == null) {
+//            throw new UsernameNotFoundException("could not found");
+//        }
+//        UserInfoDetails userInfoDetails = new UserInfoDetails(user);
+//        return userInfoDetails;
+//
+//    }
 }
