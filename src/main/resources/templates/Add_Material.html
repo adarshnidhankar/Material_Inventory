@@ -8,6 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+        body{
+            font-family: 'Marcellus', serif;
+        }
+    </style>
 </head>
 <body>
 <div class="container" style="margin-top: 20px;">
@@ -39,6 +48,7 @@
                     <div class="form-group">
                         <label>SELECT MATERIAL</label>
                         <select class="form-select" th:field="*{unit}">
+                            <option th:value="null" hidden="until-found"></option>
                             <option th:value="kg" th:text="KILOGRAM"></option>
                             <option th:value="quintal" th:text="QUINTAL"></option>
                             <option th:value="metric_ton" th:text="METRIC_TON"></option>

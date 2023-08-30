@@ -1,6 +1,5 @@
 package com.Spring_Boot.Material_Inventory.controller;
 
-import com.Spring_Boot.Material_Inventory.model.Available_Material;
 import com.Spring_Boot.Material_Inventory.model.Material;
 import com.Spring_Boot.Material_Inventory.model.Requested_Material;
 import com.Spring_Boot.Material_Inventory.service.Available_Material_Service;
@@ -10,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class Main_Controller {
@@ -28,7 +30,7 @@ public class Main_Controller {
         this.materialService = materialService;
     }
 
-//when we run the project, it will go to landing page.
+    //when we run the project, it will go to landing page.
     @GetMapping("/")
     public String landingPage() {
         return "Home_Page";
@@ -107,6 +109,7 @@ public class Main_Controller {
         model.addAttribute("newMaterial", requestedMaterial);
         return "Add_Requested_Material";
     }
+
     // this is used to save the requested material into the table.
     @PostMapping("/saveRequestedMaterial")
     public String saveRequestedMaterial(@ModelAttribute() Requested_Material material) {
@@ -137,7 +140,7 @@ public class Main_Controller {
 
     //this is used to redirect the user signup page.
     @GetMapping("/signup")
-    public String signupPage(){
+    public String signupPage() {
         return "/User_Signup";
     }
 
