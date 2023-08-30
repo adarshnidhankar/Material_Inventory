@@ -16,16 +16,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class User_Security {
 
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.authorizeRequests(config -> config
-//                        .requestMatchers("/").hasAnyRole("ADMIN", "USER")
-//                        .requestMatchers("/siteIncharge").hasRole("USER")
-//                        .requestMatchers("/getMaterial").hasRole("ADMIN")
-//                        .anyRequest().authenticated())
-//                .formLogin(Customizer.withDefaults());
-//        return http.build();
-//    }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeRequests(config -> config
+                        .requestMatchers("/").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/siteIncharge").hasRole("USER")
+                        .requestMatchers("/getMaterial").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .formLogin().loginPage("/login");
+        return http.build();
+    }
 
     @Bean
     public UserDetailsService userDetailsService() {

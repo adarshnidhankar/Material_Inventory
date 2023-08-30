@@ -144,5 +144,10 @@ public class Main_Controller {
         return "/User_Signup";
     }
 
+    //this is used to fetch login page.
+    @GetMapping("/login")
+    public String loginPage(){
+        return "/Login_Form";
+    }
 
 }
