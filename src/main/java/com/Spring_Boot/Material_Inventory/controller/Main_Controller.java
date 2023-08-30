@@ -27,6 +27,7 @@ public class Main_Controller {
         super();
         this.materialService = materialService;
     }
+
 //when we run the project, it will go to landing page.
     @GetMapping("/")
     public String landingPage() {
@@ -73,7 +74,6 @@ public class Main_Controller {
         existingMaterial.setUnit(material.getUnit());
 
         materialService.updateMaterial(existingMaterial);
-
         return "redirect:/getMaterial";
     }
 

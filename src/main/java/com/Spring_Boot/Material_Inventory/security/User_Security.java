@@ -2,46 +2,48 @@ package com.Spring_Boot.Material_Inventory.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
-//@Configuration
-//@EnableWebSecurity
-//@EnableMethodSecurity
+@Configuration
+@EnableWebSecurity
 public class User_Security {
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return new UserInfoUserDetailsService();
-//    }
-//
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Bean
-//    public DaoAuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider dao = new DaoAuthenticationProvider();
-//        dao.setUserDetailsService(this.userDetailsService());
-//        dao.setPasswordEncoder(passwordEncoder());
-//        return dao;
-//    }
-//
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception{
-//        auth.authenticationProvider(authenticationProvider());
-//    }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeRequests(config -> config
+                        .requestMatchers("/").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/siteIncharge").hasRole("USER")
+                        .requestMatchers("/getMaterial").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .formLogin(Customizer.withDefaults());
+        return http.build();
+    }
 
-//    public void configure(HttpSecurity http) throws Exception{
-//        http.authorizeRequests().
-//    }
+    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user1 = User.builder()
+                .username("adarsh")
+                .password(passwordEncoder().encode("123"))
+                .roles("ADMIN").build();
+        UserDetails user2 = User.builder()
+                .username("vijay")
+                .password(passwordEncoder().encode("221"))
+                .roles("USER").build();
+        return new InMemoryUserDetailsManager(user1, user2);
+    }
 
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 
 }

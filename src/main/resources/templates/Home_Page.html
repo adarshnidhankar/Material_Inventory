@@ -10,7 +10,7 @@
             crossorigin="anonymous"></script>
     <style type="text/css">
         body{
-            background-color: #FFEECC;
+            background-color: #fff;
         }
     </style>
 </head>
@@ -37,13 +37,17 @@
                 </li>
             </ul>
         </div>
-        <div class="d-flex" role="search" style="margin-right:20rem;">
+        <div class="d-flex" role="search" style="margin-right:200px;">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-primary" type="submit">Search</button>
+        </div>
+        <div style="margin-right:10px;">
+            <a th:href="@{/#}" class="btn btn-primary">LOGIN</a>
         </div>
         <div>
             <a th:href="@{/signup}" class="btn btn-success">SIGN UP</a>
         </div>
+
 
     </div>
 </nav>
