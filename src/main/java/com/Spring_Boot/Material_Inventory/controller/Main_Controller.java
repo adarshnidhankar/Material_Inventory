@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class Main_Controller {
@@ -74,7 +71,6 @@ public class Main_Controller {
         existingMaterial.setName(material.getName());
         existingMaterial.setQty(material.getQty());
         existingMaterial.setUnit(material.getUnit());
-
         materialService.updateMaterial(existingMaterial);
         return "redirect:/getMaterial";
     }
@@ -124,6 +120,8 @@ public class Main_Controller {
         return "Available_Material";
     }
 
+
+
     //delete material from available material table.
     @GetMapping("/deleteAvailableMaterial/{id}")
     public String deleteAvailableMaterial(@PathVariable int id) {
@@ -132,11 +130,18 @@ public class Main_Controller {
     }
 
     //delete material from the requested material table.
-    @GetMapping("/deleteRequestedMaterial/{id}")
-    public String deleteRequestedMaterial(@PathVariable int id) {
-        request_service.deleteRequestedMaterial(id);
-        return "redirect:/user";
-    }
+//    @GetMapping("/deleteRequestedMaterial/{id}")
+//    public String deleteRequestedMaterial(@PathVariable int id) {
+//        request_service.deleteRequestedMaterial(id);
+//        return "redirect:/user";
+//    }
+
+//    @GetMapping("/updateMaterial/{name}{qty}")
+//    public String updateMaterialProcedure(@PathVariable String name, int qty) {
+//        availableMaterialService.updateMaterial(name,qty);
+//        return "redirect:/getMaterial";
+//    }
+
 
     //this is used to redirect the user signup page.
     @GetMapping("/signup")
@@ -145,9 +150,17 @@ public class Main_Controller {
     }
 
     //this is used to fetch login page.
-    @GetMapping("/login")
-    public String loginPage(){
-        return "/Login_Form";
+//    @GetMapping("/login")
+//    public String loginPage(){
+//        return "/Login_Form";
+//    }
+
+    //fetching stored procedure/
+
+    @GetMapping("/approveMaterial/{id}")
+    public String callProcedure(@PathVariable int id){
+        materialService.callProcedure(id);
+        return "redirect:/user";
     }
 
 }

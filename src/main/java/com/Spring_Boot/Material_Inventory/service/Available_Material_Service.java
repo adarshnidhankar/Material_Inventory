@@ -5,6 +5,9 @@ import com.Spring_Boot.Material_Inventory.repository.Available_Material_Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -12,6 +15,9 @@ public class Available_Material_Service implements Available_Service_Interface {
 
     @Autowired
     private Available_Material_Repo material_repo;
+
+    static CallableStatement callableStatement;
+    static Connection connection;
 
     @Override
     public List<Available_Material> getAllMaterial() {
@@ -30,6 +36,18 @@ public class Available_Material_Service implements Available_Service_Interface {
     @Override
     public void deleteAvailableMaterialById(int id) {
         material_repo.deleteById(id);
+    }
+
+    @Override
+    public void updateMaterial(String name, int qty) {
+        try {
+            callableStatement = connection.prepareCall("{call updateMaterial(?,?)}");
+            callableStatement.setString(1,name);
+            callableStatement.setInt(2,qty);
+            callableStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

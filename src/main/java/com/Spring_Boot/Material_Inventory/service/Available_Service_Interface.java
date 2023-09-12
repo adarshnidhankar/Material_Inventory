@@ -9,4 +9,6 @@ public interface Available_Service_Interface {
     List<Available_Material> getAllMaterial();
     Available_Material saveMaterial(Available_Material availableMaterial);
     void deleteAvailableMaterialById(int id);
+
+    void updateMaterial(String name, int qty);
 }
