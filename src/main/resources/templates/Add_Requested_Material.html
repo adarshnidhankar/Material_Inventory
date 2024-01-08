@@ -24,15 +24,10 @@
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class="text-center">ADDING REQUESTED MATERIAL</h1>
             <div class="card-body">
-                <form th:action="@{/saveRequestedMaterial}" th:object="${newMaterial}" name="myform" method="post">
-<!--                    <div class="form-group">-->
-<!--                        <label>MATERIAL ID</label>-->
-<!--                        <input type="number" name="id" th:field="*{id}" autofocus placeholder="Enter Material ID"-->
-<!--                               class="form-control" required>-->
-<!--                    </div>-->
+                <form th:action="@{/saveRequestedMaterial}" th:object="${newMaterial}" name="myform" method="post" >
                     <div class="form-group">
-                        <label>SELECT MATERIAL NAME</label>
-                        <select class="form-select" th:field="*{name}">
+                        <select id="op1" class="form-select" th:field="*{name}" autofocus required>
+                            <option th:value="null" hidden="hidden">SELECT MATERIAL NAME </option>
                             <option th:value="iron" th:text="IRON"></option>
                             <option th:value="aluminium" th:text="ALUMINIUM"></option>
                             <option th:value="copper" th:text="COPPER"></option>
@@ -40,15 +35,16 @@
                             <option th:value="fiber" th:text="FIBER"></option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>MATERIAL QUANTITY</label>
-                        <input type="number" name="qty" th:field="*{qty}" placeholder="Enter Material Quantity"
+                    <br>
+                    <div class="form-group" >
+                        <label for="ip1">MATERIAL QUANTITY</label>
+                        <input id="ip1" type="number" name="qty" th:field="*{qty}" placeholder="Enter Material Quantity"
                                class="form-control" required>
                     </div>
+                    <br>
                     <div class="form-group">
-                        <label>SELECT MATERIAL</label>
-                        <select class="form-select" th:field="*{unit}">
-                            <option th:value="null" hidden="hidden"></option>
+                        <select id="op2" class="form-select" th:field="*{unit}" required>
+                            <option th:value="null" hidden="hidden">SELECT MATERIAL UNIT</option>
                             <option th:value="kg" th:text="KILOGRAM"></option>
                             <option th:value="quintal" th:text="QUINTAL"></option>
                             <option th:value="metric_ton" th:text="METRIC_TON"></option>
@@ -58,7 +54,7 @@
                     </div>
                     <br>
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">REQUEST MATERIAL</button>
+                        <button type="submit" class="btn btn-outline-primary">REQUEST MATERIAL</button>
                     </div>
                 </form>
             </div>

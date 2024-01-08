@@ -22,12 +22,6 @@ import javax.sql.DataSource;
 @Configuration
 
 public class User_Security extends GlobalAuthenticationConfigurerAdapter {
-    @Autowired
-    private DataSource dataSource;
-    @Override
-    public void init(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource);
-    }
 
     //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -39,18 +33,18 @@ public class User_Security extends GlobalAuthenticationConfigurerAdapter {
 //        return http.build();
 //    }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user1 = User.builder()
-//                .username("adarsh")
-//                .password(passwordEncoder().encode("123"))
-//                .roles("ADMIN").build();
-//        UserDetails user2 = User.builder()
-//                .username("vijay")
-//                .password(passwordEncoder().encode("221"))
-//                .roles("USER").build();
-//        return new InMemoryUserDetailsManager(user1, user2);
-//    }
+    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user1 = User.builder()
+                .username("adarsh")
+                .password(passwordEncoder().encode("123"))
+                .roles("ADMIN").build();
+        UserDetails user2 = User.builder()
+                .username("vijay")
+                .password(passwordEncoder().encode("221"))
+                .roles("USER").build();
+        return new InMemoryUserDetailsManager(user1, user2);
+    }
 
 
 
